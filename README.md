@@ -2,6 +2,8 @@
 
 [![Phot of esp8266](https://github.com/user-attachments/assets/c3f9e46d-11a7-44ea-9648-0d138639ec5c)](#)
 
+[Test | Протестировать](https://t.me/msg_to_screen_bot)
+
 The `config.h` file must be filled in according to the `config.h.example` example
 (файл `config.h` нужно заполнить по образцу `config.h.example`)
 ```
