@@ -5,6 +5,19 @@ String translit(const String &src) {
   for (int i = 0; i < src.length(); i++) {
     unsigned char c = src[i];
 
+    // ЭМОДЗИ (4 байта)
+    if (c >= 0xF0 && c <= 0xF4) {
+      i += 3; // пропускаем 4-байтовый символ
+      continue;
+    }
+
+    // 3-байтовые символы (например, некоторые спецсимволы)
+    if (c >= 0xE0 && c <= 0xEF) {
+      i += 2;
+      continue;
+    }
+
+    // Кириллица (2 байта)
     if (c == 0xD0 || c == 0xD1) {
       unsigned char c2 = src[i + 1];
       i++;
@@ -39,9 +52,9 @@ String translit(const String &src) {
         case 0xD0A7: out += "Ch"; break;
         case 0xD0A8: out += "Sh"; break;
         case 0xD0A9: out += "Sch"; break;
-        case 0xD0AA: out += ""; break;
+        case 0xD0AA: break;
         case 0xD0AB: out += "Y"; break;
-        case 0xD0AC: out += ""; break;
+        case 0xD0AC: break;
         case 0xD0AD: out += "E"; break;
         case 0xD0AE: out += "Yu"; break;
         case 0xD0AF: out += "Ya"; break;
@@ -73,19 +86,21 @@ String translit(const String &src) {
         case 0xD187: out += "ch"; break;
         case 0xD188: out += "sh"; break;
         case 0xD189: out += "sch"; break;
-        case 0xD18A: out += ""; break;
+        case 0xD18A: break;
         case 0xD18B: out += "y"; break;
-        case 0xD18C: out += ""; break;
+        case 0xD18C: break;
         case 0xD18D: out += "e"; break;
         case 0xD18E: out += "yu"; break;
         case 0xD18F: out += "ya"; break;
 
         default:
-          out += "?";
+          break;
       }
-    } else {
-      out += (char)c;
+      continue;
     }
+
+    // ASCII
+    out += (char)c;
   }
   return out;
 }
