@@ -22,3 +22,14 @@ The `config.h` file must be filled in according to the `config.h.example` exampl
 
 BTN_IN_PC is connected via an optocoupler to the computer's power button.
 (BTN_IN_PC подключен через оптопару к кнопке питания компьютера.)
+
+```
+ESP8266
++--------------+
+|              |                     Optocoupler
+|              |                     +------+
+|           GPIO5 ----[ R ]--------- A      +----------------( POWER SW - )
+|              |                     |      |
+|             GND ------------------ K      +----------------( POWER SW + )
++--------------+                     +------+
+```
